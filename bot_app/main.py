@@ -7,7 +7,7 @@ import pickle
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 
-API_TOKEN = '6253053031:AAF8tQLUVZrqyFJUMzOgm9Kzv5-e-c31drc'  
+API_TOKEN = '6921521470:AAHIi_d2An9GRsaHx83ogPw0nVUPQk7uRLs'  
 model_path = 'model_svc.pkl'
 pca_transform_path = 'model_pca.pkl'
 with open(model_path, 'rb') as m:
