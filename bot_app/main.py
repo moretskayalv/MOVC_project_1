@@ -8,10 +8,15 @@ from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 
 API_TOKEN = '6921521470:AAHIi_d2An9GRsaHx83ogPw0nVUPQk7uRLs'  
+
 model_path = 'model_svc.pkl'
-pca_transform_path = 'model_pca.pkl'
+
 with open(model_path, 'rb') as m:
     model = pickle.load(m)
+
+join_files('model_pca.pkl', 'model', 'model_reconstructed.pkl')
+pca_transform_path = 'model_reconstructed.pkl'
+
 with open(pca_transform_path, 'rb') as pca:
     pca_transform = pickle.load(pca)
 
