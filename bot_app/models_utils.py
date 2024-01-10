@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
+import os
 
 
 def input_img_to_array(input_image):
@@ -27,3 +28,13 @@ def predict_image(model, reduced_array):
                3:"на изображении присутствуют и Tom и Jerry"}
   prediction = model.predict(reduced_array).tolist()[0]
   return instances[prediction]
+
+
+def join_files(original_file_name, parts_folder, output_file_path):
+    parts = sorted([f for f in os.listdir(parts_folder)],key= lambda x: int(x.split('_part')[1])) 
+    with open(output_file_path, 'wb') as output_file:
+        for part_file_name in parts:
+            part_file_path = os.path.join(parts_folder, part_file_name)
+            with open(part_file_path, 'rb') as part_file:
+                output_file.write(part_file.read())
+
