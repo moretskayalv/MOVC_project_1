@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+fastapi-cache2
+fastapi-cache2[redis]
+fastapi-cache2[memcache]
+fastapi-cache2[dynamodb]
+numpy
+streamlit
+python-multipart
