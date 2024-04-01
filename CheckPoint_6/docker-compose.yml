@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  fastapi_with_st:
+    image: helenaukraintseva/fastapi_with_st:0.6
+    ports:
+      - "80:80"
+      - "4444:4444"
+    networks:
+      - app-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090" # Порт по умолчанию для Prometheus
+    depends_on:
+      - fastapi_with_st
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

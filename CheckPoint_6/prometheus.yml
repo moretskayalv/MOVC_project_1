@@ -1,0 +1,6 @@
+scrape_configs:
+  - job_name: 'fastapi_with_st'
+    scrape_interval: 5s  # Скрейпинг метрик с FastAPI приложения каждые 5 секунд
+    static_configs:
+      - targets: ['host.docker.internal:9090'] # Используйте 'host.docker.internal' для доступа к хосту из Docker контейнера на Windows или Mac
+        # Если Prometheus и ваше приложение запущены в одной сети Docker, вы можете использовать имя сервиса вместо 'host.docker.internal'

@@ -11,5 +11,6 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # Запускаем скрипт при старте контейнера
-CMD ["start.sh"]
 # docker run -p 80:80 -p 4444:4444  fastapi_with_st
+RUN chmod +x start.sh
+CMD ["./start.sh"]

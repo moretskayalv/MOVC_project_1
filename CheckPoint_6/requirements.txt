@@ -7,3 +7,6 @@ fastapi-cache2[dynamodb]
 numpy
 streamlit
 python-multipart
+prometheus-client
+scikit-learn==1.2.2
+pillow==10.2.0

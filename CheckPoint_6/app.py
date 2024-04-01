@@ -12,7 +12,10 @@ from typing import List
 from models_utils import classify_image 
 from PIL import Image
 import io
+from prometheus_client import Histogram
+from prometheus_client import make_asgi_app
 
+CLASSIFY_IMAGE_HISTOGRAM = Histogram('classify_image_duration_seconds', 'Время, затраченное на classify_image(img) в секундах')
 app = FastAPI()
 
 results = {}
@@ -25,7 +28,9 @@ async def create_upload_file(image: UploadFile = File(...)):
     image_contents = await image.read()
     # Преобразование в объект BytesIO
     img = Image.open(io.BytesIO(image_contents))
-    report = classify_image(img)
+    #report = classify_image(img)
+    with CLASSIFY_IMAGE_HISTOGRAM.time():
+        report = classify_image(img)
     results[image.filename] = report
     
     return {"filename": image.filename,"result":report}
@@ -69,5 +74,5 @@ async def ping():
 async def startup():
     redis = aioredis.from_url("redis://localhost")
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-
+    app.mount("/metrics", make_asgi_app())
 
